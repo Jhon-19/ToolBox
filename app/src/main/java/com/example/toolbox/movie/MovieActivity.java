@@ -1,21 +1,21 @@
 package com.example.toolbox.movie;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.toolbox.R;
 import com.example.toolbox.movie.support.Movie;
 import com.example.toolbox.movie.support.MovieAdapter;
 import com.example.toolbox.movie.support.MovieNetUtil;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-
-import java.io.File;
-import java.util.ArrayList;
 /**
  * Movie list Activity.
  *
@@ -81,6 +81,7 @@ public class MovieActivity extends AppCompatActivity {
         }).start();
     }
 }
+
 /**
  * Used for update movie item view after loaded from Internet.
  * Only used in this file.
@@ -99,6 +100,7 @@ class UpdateViewThread implements Runnable{
         adapter.addItem(m);
     }
 }
+
 /**
  * Used for monitoring if it's necessary to load more movies in list.
  * Only used in this file.

@@ -1,13 +1,13 @@
 package com.example.toolbox.movie.support;
 
-import androidx.annotation.NonNull;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.net.HttpURLConnection;
+import java.net.URL;
+
+import androidx.annotation.NonNull;
 
 /**
  * Contains the information of a movie.

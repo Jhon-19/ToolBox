@@ -8,15 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.toolbox.R;
 import com.example.toolbox.movie.DetailActivity;
 import com.example.toolbox.movie.MovieActivity;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * The implementation of RecyclerView.Adapter.
@@ -42,7 +42,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     }
 
-    public MovieAdapter(ArrayList<Movie> movieList,File cacheDir) {
+    public MovieAdapter(ArrayList<Movie> movieList, File cacheDir) {
         this.movieList = movieList;
         this.cacheDir=cacheDir;
     }

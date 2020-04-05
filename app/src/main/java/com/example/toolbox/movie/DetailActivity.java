@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.toolbox.R;
 import com.example.toolbox.movie.support.Movie;
 import com.example.toolbox.movie.support.MovieNetUtil;
 
 import java.io.IOException;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Movie detail page.
@@ -39,7 +39,7 @@ public class DetailActivity extends AppCompatActivity {
             public void run(){
                 Movie detail;
                 try {
-                    detail=MovieNetUtil.parseDetailPage(m.detailPage);
+                    detail= MovieNetUtil.parseDetailPage(m.detailPage);
                 } catch (IOException e) {
                     e.printStackTrace();
                     return;
@@ -53,6 +53,7 @@ public class DetailActivity extends AppCompatActivity {
         }).start();
     }
 }
+
 /**
  * Used for update text view in detail page.
  * Only used in this file
@@ -62,7 +63,7 @@ public class DetailActivity extends AppCompatActivity {
 class ViewUpdateThread implements Runnable{
     Movie m;
     DetailActivity target;
-    public ViewUpdateThread(Movie m,DetailActivity target){
+    public ViewUpdateThread(Movie m, DetailActivity target){
         this.m=m;
         this.target=target;
     }

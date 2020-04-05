@@ -30,7 +30,7 @@ public class MovieNetUtil {
      * @param offset Starting from the given movie number.
      * @param len The numbers of movie that will be in the returned list.
      * */
-    public static ArrayList<Movie> getMovies(int offset,int len) throws IOException, JSONException {
+    public static ArrayList<Movie> getMovies(int offset, int len) throws IOException, JSONException {
         URL request=new URL(INDEX_REQUEST_URL+"&"+PAGE_OFFSET+"="+offset+"&"+PAGE_MAX+"="+(offset+len));
         HttpURLConnection connection=(HttpURLConnection)request.openConnection();
         connection.setRequestMethod("GET");
@@ -59,7 +59,7 @@ public class MovieNetUtil {
 
         return result;
     }
-    public static ArrayList<Movie> getMoviesNoDetail(int offset,int len) throws IOException, JSONException {
+    public static ArrayList<Movie> getMoviesNoDetail(int offset, int len) throws IOException, JSONException {
         URL request = new URL(INDEX_REQUEST_URL + "&" + PAGE_OFFSET + "=" + offset + "&" + PAGE_MAX + "=" + (offset + len));
         HttpURLConnection connection = (HttpURLConnection) request.openConnection();
         connection.setRequestMethod("GET");

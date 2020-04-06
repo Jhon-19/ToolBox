@@ -20,6 +20,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            java {
+                srcDirs 'src/main/java', 'src/main/java/notes'
+            }
+        }
+    }
 
 }
 
@@ -34,4 +41,5 @@ dependencies {
 
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.google.android.material:material:1.1.0'
+    implementation 'org.litepal.android:java:3.0.0'
 }

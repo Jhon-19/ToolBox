@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button techButton;
     private Button movieButton;
+    private Button noteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MovieActivity.class);
+                startActivity(intent);
+            }
+        });
+        noteButton = (Button)findViewById(R.id.note_button);
+        noteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NoteActivity.class);
                 startActivity(intent);
             }
         });

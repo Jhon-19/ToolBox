@@ -38,20 +38,29 @@ public class CreateNoteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String text = noteText.getText().toString();
                 String title = titleText.getText().toString();
+                if(TextUtils.isEmpty(text) && TextUtils.isEmpty(title)){
+                    finish();
+                    return;
+                }
                 notes.Note currentNote = new notes.Note();
                 currentNote.setLength(text.length());
                 if(!TextUtils.isEmpty(title)){
                     currentNote.setTitle(title);
                 }else {
-                    currentNote.setCreated_time(new Date(System.currentTimeMillis()));
-                    currentNote.setTitle(text.substring(0, 3));
+                    if (text.length() > 6) {
+                        currentNote.setTitle(text.substring(0, 6));
+                    } else {
+                        currentNote.setTitle(text);
+                    }
                 }
                 currentNote.setText(text);
-                currentNote.setLast_edited_time(new Date(System.currentTimeMillis()));
                 boolean isEdit = getIntent().getBooleanExtra("isEdit", false);
                 if(isEdit){
+                    currentNote.setLast_edited_time(new Date(System.currentTimeMillis()));
                     currentNote.update(getIntent().getIntExtra("noteId", -1));
                 }else {
+                    currentNote.setCreated_time(new Date(System.currentTimeMillis()));
+                    currentNote.setLast_edited_time(new Date(System.currentTimeMillis()));
                     currentNote.save();
                 }
                 NoteActivity.changeNotes();

@@ -4,4 +4,11 @@
     <string name="movie_activity_title">电影推荐</string>
     <string name="Loading">加载中</string>
     <string name="Poster">电影海报</string>
+    <string name="homework_edit_text">编辑作业</string>
+    <string name="homework_edit_subject_text">课程名称</string>
+    <string name="homework_edit_deadline_text" >截止日期</string>
+    <string name="homework_edit_description">描述</string>
+    <string name="homework_edit_submit_text" >确定</string>
+    <string name="homework_activity_title">作业列表</string>
+    <string name="homework_edit_delete">删除</string>
 </resources>

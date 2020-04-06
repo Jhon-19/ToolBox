@@ -25,4 +25,20 @@
         android:layout_alignLeft="@id/tech_button"
         android:layout_alignParentBottom="true"
         android:text="笔记" />
+
+    <Button
+        android:id="@+id/homework_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@id/tech_button"
+        android:text="作业"/>
+
+    <Button
+        android:id="@+id/course_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/tech_button"
+        android:text="课程直通"/>
 </RelativeLayout>

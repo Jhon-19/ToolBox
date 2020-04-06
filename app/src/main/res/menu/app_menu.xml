@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/wemeet"
+        android:title="腾讯会议"/>
+
+    <item
+        android:id="@+id/edu"
+        android:title="腾讯课堂"/>
+
+    <item
+        android:id="@+id/bilibili"
+        android:title="b站"/>
+
+    <item
+        android:id="@+id/bilionline"
+        android:title="b站 网页"/>
+
+    <item
+        android:id="@+id/qq"
+        android:title="QQ"/>
+
+    <item
+        android:id="@+id/wechat"
+        android:title="微信"/>
+
+    <item
+        android:id="@+id/rimet"
+        android:title="钉钉"/>
+
+    <item
+        android:id="@+id/chaoxing"
+        android:title="超星学习通"/>
+
+    <item
+        android:id="@+id/icourse"
+        android:title="中国大学MOOC网"/>
+
+    <item
+        android:id="@+id/icourse_app"
+        android:title="中国大学MOOC APP"/>
+</menu>

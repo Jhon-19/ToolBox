@@ -3,4 +3,7 @@
     <color name="colorPrimary">#004ac4</color>
     <color name="colorPrimaryDark">#001fbd</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="homework_deadline_far">#009900</color>
+    <color name="homework_deadline_near">#999900</color>
+    <color name="homework_deadline_danger">#990000</color>
 </resources>

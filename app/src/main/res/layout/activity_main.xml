@@ -41,4 +41,12 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/tech_button"
         android:text="课程直通"/>
+
+    <Button
+        android:id="@+id/helper_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="专注助手"/>
 </RelativeLayout>

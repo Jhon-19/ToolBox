@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private Button noteButton;
     private Button homeworkButton;
     private Button courseButton;
+    private Button helperButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         noteButton = (Button)findViewById(R.id.note_button);
         homeworkButton = (Button)findViewById(R.id.homework_button);
         courseButton = (Button)findViewById(R.id.course_button);
+        helperButton = (Button)findViewById(R.id.helper_button);
 
         handleClick();
     }
@@ -83,6 +85,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, HomeworkActivity.class);
+                startActivity(intent);
+            }
+        });
+        helperButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HelperActivity.class);
                 startActivity(intent);
             }
         });

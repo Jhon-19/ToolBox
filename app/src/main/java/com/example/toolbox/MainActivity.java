@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.toolbox.movie.MovieActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private Button movieButton;
     private Button noteButton;
     private Button homeworkButton;
-    private Button courseButton;
+    private FloatingActionButton courseButton;
     private Button helperButton;
 
     @Override
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         movieButton = (Button)findViewById(R.id.movie_button);
         noteButton = (Button)findViewById(R.id.note_button);
         homeworkButton = (Button)findViewById(R.id.homework_button);
-        courseButton = (Button)findViewById(R.id.course_button);
+        courseButton = (FloatingActionButton) findViewById(R.id.course_button);
         helperButton = (Button)findViewById(R.id.helper_button);
 
         handleClick();

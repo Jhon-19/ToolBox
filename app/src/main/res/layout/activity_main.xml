@@ -12,8 +12,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="520dp"
-        android:layout_marginEnd="161dp"
-        android:layout_marginRight="161dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginRight="160dp"
         android:background="@drawable/tech" />
 
     <Button

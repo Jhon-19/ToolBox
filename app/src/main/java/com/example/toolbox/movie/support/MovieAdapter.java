@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.toolbox.R;
@@ -33,11 +34,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView poster;
         TextView name;
-
+        LinearLayout frame;
         ViewHolder(View view) {
             super(view);
-            poster = (ImageView) view.findViewById(R.id.movie_poster);
-            name = (TextView) view.findViewById(R.id.movie_name);
+            poster = view.findViewById(R.id.movie_poster);
+            name = view.findViewById(R.id.movie_name);
+            frame= view.findViewById(R.id.movie_item_frame);
         }
 
     }
@@ -61,7 +63,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             holder.poster.setImageURI(Uri.parse(m.imageStorage.toString()));
             holder.name.setText(m.name);
 
-            holder.name.setOnClickListener(new View.OnClickListener() {
+            holder.frame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent switcher=new Intent(main,DetailActivity.class);

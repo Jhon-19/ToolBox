@@ -3,12 +3,15 @@ package homework;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.toolbox.R;
@@ -29,6 +32,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import homework_edit.HomeworkEditActivity;
 
+import static android.media.AudioManager.STREAM_MUSIC;
+
 /**
  * The implementation of RecyclerView.Adapter.
  * Used for displaying movie item in list.
@@ -44,12 +49,13 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         TextView description;
         TextView dueDate;
         CheckBox complete;
-
+        LinearLayout frame;
          ViewHolder(View view) {
             super(view);
             description=view.findViewById(R.id.homework_desc);
             dueDate=view.findViewById(R.id.due_date);
             complete=view.findViewById(R.id.complete_check);
+            frame=view.findViewById(R.id.homework_item_frame);
         }
 
     }
@@ -63,16 +69,16 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
             ObjectInputStream read=new ObjectInputStream(new FileInputStream(listData));
             homeworkList=(ArrayList<Homework>)read.readObject();
             GregorianCalendar now=getCurrentStandardDay();
-            ArrayList<Integer> removeIndexes=new ArrayList<>();
+            ArrayList<Homework> removeIndexes=new ArrayList<>();
             for(int i=0;i<homeworkList.size();i++){
                 if(homeworkList.get(i).completed){
                     if(divThousandIgnoreDetail(now.getTimeInMillis()-homeworkList.get(i).completeTime.getTimeInMillis())>=24*60*60)
-                        removeIndexes.add(i);
+                        removeIndexes.add(homeworkList.get(i));
                 }
             }
-            Iterator<Integer> removeIterator=removeIndexes.iterator();
+            Iterator<Homework> removeIterator=removeIndexes.iterator();
             while(removeIterator.hasNext())
-                homeworkList.remove(removeIterator.next().intValue());
+                homeworkList.remove(removeIterator.next());
         }catch(IOException|ClassNotFoundException e){
             Log.e("Homework","Error in reading list data file.",e);
             homeworkList=new ArrayList<>();
@@ -107,7 +113,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
                 (dayRemain<=3)?R.color.homework_deadline_near:R.color.homework_deadline_far;
         holder.dueDate.setText(dueDateText);
         holder.dueDate.setTextColor(main.getResources().getColor(dueDateColor));
-        holder.description.setOnClickListener(new View.OnClickListener() {
+        holder.frame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HomeworkEditActivity.current=h;
@@ -123,6 +129,10 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
                 h.completed=isChecked;
                 if(isChecked)h.completeTime=getCurrentStandardDay();
                 _this.saveList();
+                if(isChecked) {
+                    MediaPlayer mp = MediaPlayer.create(main, R.raw.complete);
+                    mp.start();
+                }
             }
         });
     }
@@ -186,6 +196,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         now.set(Calendar.HOUR_OF_DAY,0);
         now.set(Calendar.MINUTE,0);
         now.set(Calendar.SECOND,0);
+        now.set(Calendar.MILLISECOND,0);
         return now;
     }
     /**

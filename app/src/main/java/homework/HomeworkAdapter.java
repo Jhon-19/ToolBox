@@ -1,10 +1,7 @@
 package homework;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +10,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.toolbox.R;
 
@@ -28,22 +28,18 @@ import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import homework_edit.HomeworkEditActivity;
-
-import static android.media.AudioManager.STREAM_MUSIC;
 
 /**
  * The implementation of RecyclerView.Adapter.
- * Used for displaying movie item in list.
+ * Used for displaying homework item in list.
  *
  * @author Zhou Jingsen
  * */
 public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHolder> {
 
     public ArrayList<Homework> homeworkList;
-    public HomeworkActivity main;
+    HomeworkActivity main;
     public static final String DATA_FILE_NAME="homework.dat";
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView description;
@@ -60,7 +56,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
 
     }
     @SuppressWarnings("unchecked")
-    public HomeworkAdapter(File dataDir) {
+    HomeworkAdapter(File dataDir) {
         File listData=new File(dataDir.getParent()+"/"+DATA_FILE_NAME);
         if(!listData.exists()){
             homeworkList=new ArrayList<>();
@@ -72,7 +68,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
             ArrayList<Homework> removeIndexes=new ArrayList<>();
             for(int i=0;i<homeworkList.size();i++){
                 if(homeworkList.get(i).completed){
-                    if(divThousandIgnoreDetail(now.getTimeInMillis()-homeworkList.get(i).completeTime.getTimeInMillis())>=24*60*60)
+                    if((now.getTimeInMillis()-homeworkList.get(i).completeTime.getTimeInMillis())>=24*1000*60*60)
                         removeIndexes.add(homeworkList.get(i));
                 }
             }
@@ -99,8 +95,8 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         holder.complete.setChecked(h.completed);
         holder.description.setText(h.description);
         GregorianCalendar now=getCurrentStandardDay();
-        Log.d("Homework[Debug]",Long.toString(h.deadline.getTimeInMillis()-now.getTimeInMillis()));
-        int dayRemain=(int)(divThousandIgnoreDetail(h.deadline.getTimeInMillis()-now.getTimeInMillis())/(24*60*60));
+        int dayRemain=(int)((h.deadline.getTimeInMillis()-now.getTimeInMillis())/(24*60*1000*60));
+        Log.d("[debug][Hw]",Long.toString(h.deadline.getTimeInMillis()-now.getTimeInMillis()));
         String dueDateText=
                         (dayRemain<-2)?"已逾期"+Math.abs(dayRemain)+"天":
                         (dayRemain==-2)?"前天":
@@ -141,31 +137,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
     public int getItemCount() {
         return homeworkList.size();
     }
-    /**
-     * Append a new homework item to the end of this list.
-     *
-     * @param m The homework to be added.
-     * */
-    public void addItem(Homework m){
-        homeworkList.add(m);
-        sortList();
-        notifyItemRangeChanged(0,homeworkList.size());
-    }
     public void saveList(){
-        int REQUEST_EXTERNAL_STORAGE = 1;
-        String[] PERMISSIONS_STORAGE = {
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-        };
-        int permission = main.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
-            main.requestPermissions(
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-        }
         try{
             ObjectOutputStream write=new ObjectOutputStream(new FileOutputStream(main.getFilesDir().getParent()+"/"+HomeworkAdapter.DATA_FILE_NAME));
             write.writeObject(homeworkList);
@@ -175,17 +147,17 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
     }
     /**
      * Sort the homework list.
-     * The completed homework and the homework with a later deadline will be in the bottom.
+     * The homework with a later deadline will be in the bottom.
      * */
     public void sortList(){
+
         homeworkList.sort(new Comparator<Homework>() {
             @Override
             public int compare(Homework o1, Homework o2) {
-                boolean xor=o1.completed&&!o2.completed||!o1.completed&&o2.completed;
-                return xor?(o1.completed?1:-1):(int)(divThousandIgnoreDetail(o1.deadline.getTimeInMillis()-o2.deadline.getTimeInMillis())/(60*60*24));
+                Log.d("[debug][Hw]",o1.subjectName+"compare"+o2.subjectName+":"+(int)((o1.deadline.getTimeInMillis()-o2.deadline.getTimeInMillis())/(1000*60*60*24)));
+                return (int)((o1.deadline.getTimeInMillis()-o2.deadline.getTimeInMillis())/(1000*60*60*24));
             }
         });
-
         notifyItemRangeChanged(0,homeworkList.size());
     }
     /**
@@ -198,15 +170,5 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         now.set(Calendar.SECOND,0);
         now.set(Calendar.MILLISECOND,0);
         return now;
-    }
-    /**
-     * Divide a number by 1000, using half-up rounding.
-     * */
-    public static long divThousandIgnoreDetail(long input){
-        boolean negative=input<0;
-        input=Math.abs(input);
-        long mod1000=input%1000;
-        boolean addOrSub=input%10000>5000;
-        return (negative?-1:1)*(addOrSub?input+(1000-mod1000):input-mod1000)/1000;
     }
 }

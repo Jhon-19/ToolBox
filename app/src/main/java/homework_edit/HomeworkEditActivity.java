@@ -38,7 +38,6 @@ public class HomeworkEditActivity extends AppCompatActivity {
             description.setText(current.description);
             deadline.updateDate(current.deadline.get(Calendar.YEAR),current.deadline.get(Calendar.MONTH),current.deadline.get(Calendar.DAY_OF_MONTH));
         }
-        HomeworkEditActivity _this=this;
         AddHomeworkClickListener listener=new AddHomeworkClickListener();
         listener.cActivity=this;
         listener.adapter=adapter;
@@ -76,16 +75,16 @@ class AddHomeworkClickListener implements View.OnClickListener{
         date.set(Calendar.HOUR_OF_DAY, 0);
         date.set(Calendar.MINUTE, 0);
         date.set(Calendar.SECOND, 0);
+        date.set(Calendar.MILLISECOND,0);
         h.deadline = date;
         if (HomeworkEditActivity.editExistHomework) {
             h.completed=HomeworkEditActivity.current.completed;
             h.completeTime=HomeworkEditActivity.current.completeTime;
-            int index = adapter.homeworkList.indexOf(HomeworkEditActivity.current);
-            adapter.homeworkList.remove(index);
-            adapter.notifyItemRemoved(index);
+            adapter.homeworkList.remove(HomeworkEditActivity.current);
         }
         HomeworkEditActivity.current=h;
-        adapter.addItem(HomeworkEditActivity.current);
+        adapter.homeworkList.add(HomeworkEditActivity.current);
+        adapter.sortList();
         adapter.saveList();
         HomeworkEditActivity.editExistHomework = false;
         cActivity.finish();

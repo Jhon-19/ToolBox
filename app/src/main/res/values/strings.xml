@@ -11,4 +11,6 @@
     <string name="homework_edit_submit_text">确定</string>
     <string name="homework_activity_title">作业列表</string>
     <string name="homework_edit_delete">删除</string>
+    <string name="homework_notify_title">作业提醒</string>
+    <string name="homework_notify_desc">有临近截止日期的作业</string>
 </resources>

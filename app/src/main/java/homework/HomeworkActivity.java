@@ -1,7 +1,12 @@
 package homework;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.toolbox.R;
@@ -40,7 +45,12 @@ public class HomeworkActivity extends AppCompatActivity {
                 _this.startActivity(switcher);
             }
         });
-
+        Intent intent=new Intent(this,HomeworkNotifyService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent);
+        }else{
+            startService(intent);
+        }
     }
     @Override
     protected void onDestroy(){

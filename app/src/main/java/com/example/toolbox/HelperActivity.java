@@ -69,7 +69,7 @@ public class HelperActivity extends AppCompatActivity {
                 Toast.makeText(HelperActivity.this, "已结束专注模式", Toast.LENGTH_LONG).show();
                 stopHour = stopDate.get(Calendar.HOUR_OF_DAY);
                 stopMinute = stopDate.get(Calendar.MINUTE);
-                hanldeTime();
+                handleTime();
             }
         });
     }
@@ -109,7 +109,7 @@ public class HelperActivity extends AppCompatActivity {
         stopDate = Calendar.getInstance();
         stopHour = stopDate.get(Calendar.HOUR_OF_DAY);
         stopMinute = stopDate.get(Calendar.MINUTE);
-        hanldeTime();
+        handleTime();
         super.onStop();
     }
 
@@ -127,7 +127,7 @@ public class HelperActivity extends AppCompatActivity {
         stopDate = Calendar.getInstance();
         stopHour = stopDate.get(Calendar.HOUR_OF_DAY);
         stopMinute = stopDate.get(Calendar.MINUTE);
-        hanldeTime();
+        handleTime();
         super.onPause();
     }
 
@@ -139,7 +139,7 @@ public class HelperActivity extends AppCompatActivity {
         startMinute = startDate.get(Calendar.MINUTE);
     }
 
-    private void hanldeTime(){
+    private void handleTime(){
         ConcernedTime time = new ConcernedTime();
         int[] concernedMinutes = new int[stopHour-startHour+1];
         for(int i = startHour, index = 0; i <= stopHour; i++, index++){

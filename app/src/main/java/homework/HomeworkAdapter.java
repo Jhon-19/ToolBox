@@ -64,7 +64,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         try{
             ObjectInputStream read=new ObjectInputStream(new FileInputStream(listData));
             homeworkList=(ArrayList<Homework>)read.readObject();
-            GregorianCalendar now=getCurrentStandardDay();
+            GregorianCalendar now=getStandardDay(new GregorianCalendar());
             ArrayList<Homework> removeIndexes=new ArrayList<>();
             for(int i=0;i<homeworkList.size();i++){
                 if(homeworkList.get(i).completed){
@@ -94,7 +94,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         holder.complete.setText(h.subjectName);
         holder.complete.setChecked(h.completed);
         holder.description.setText(h.description);
-        GregorianCalendar now=getCurrentStandardDay();
+        GregorianCalendar now=getStandardDay(new GregorianCalendar());
         int dayRemain=(int)((h.deadline.getTimeInMillis()-now.getTimeInMillis())/(24*60*1000*60));
         Log.d("[debug][Hw]",Long.toString(h.deadline.getTimeInMillis()-now.getTimeInMillis()));
         String dueDateText=
@@ -123,7 +123,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 h.completed=isChecked;
-                if(isChecked)h.completeTime=getCurrentStandardDay();
+                if(isChecked)h.completeTime=getStandardDay(new GregorianCalendar());
                 _this.saveList();
                 if(isChecked) {
                     MediaPlayer mp = MediaPlayer.create(main, R.raw.complete);
@@ -163,8 +163,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
     /**
      * Get the gregorian calendar representing the 00:00 of today,
      * */
-    public static GregorianCalendar getCurrentStandardDay(){
-        GregorianCalendar now=new GregorianCalendar();
+    public static GregorianCalendar getStandardDay(GregorianCalendar now){
         now.set(Calendar.HOUR_OF_DAY,0);
         now.set(Calendar.MINUTE,0);
         now.set(Calendar.SECOND,0);

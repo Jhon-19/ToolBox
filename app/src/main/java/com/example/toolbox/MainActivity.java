@@ -22,6 +22,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import attentive.AttentiveActivity;
 import homework.HomeworkActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         homeworkButton = (Button)findViewById(R.id.homework_button);
         courseButton = (FloatingActionButton) findViewById(R.id.course_button);
         helperButton = (Button)findViewById(R.id.helper_button);
-
         handleClick();
     }
 
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         helperButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HelperActivity.class);
+                Intent intent=new Intent(MainActivity.this, AttentiveActivity.class);
                 startActivity(intent);
             }
         });

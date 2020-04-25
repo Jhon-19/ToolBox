@@ -6,4 +6,7 @@
     <color name="homework_deadline_far">#009900</color>
     <color name="homework_deadline_near">#999900</color>
     <color name="homework_deadline_danger">#990000</color>
+    <color name="attentive_story_button">#dd9900</color>
+    <color name="attentive_story_button_invalid">#BBBBBB</color>
+    <color name="attentive_story_text_background">#BB0066CC</color>
 </resources>

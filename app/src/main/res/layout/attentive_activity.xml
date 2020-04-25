@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="true"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -51,7 +52,36 @@
                 app:fontFamily="sans-serif" />
         </LinearLayout>
     </LinearLayout>
+
     <attentive.DiagramView
+        android:id="@+id/attentive_diagram"
         android:layout_width="match_parent"
-        android:layout_height="400dp"/>
+        android:layout_height="400dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/attentive_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/start_attentive_margin"
+            android:layout_marginTop="@dimen/start_attentive_margin"
+            android:layout_marginBottom="@dimen/start_attentive_margin"
+            android:layout_weight="0.3"
+            android:background="@color/colorAccent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <Button
+            android:id="@+id/attentive_story"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/start_attentive_margin"
+            android:layout_marginRight="@dimen/start_attentive_margin"
+            android:layout_marginBottom="@dimen/start_attentive_margin"
+            android:layout_weight="0.7"
+            android:background="@color/attentive_story_button_invalid" />
+    </LinearLayout>
+
 </LinearLayout>

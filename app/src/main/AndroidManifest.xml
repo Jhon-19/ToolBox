@@ -47,6 +47,12 @@
             android:name="homework_edit.HomeworkEditActivity"
             android:label="detail"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="attentive.AttentiveActivity"
+            android:label="detail"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="attentive.AttentiveStoryActivity"
+            android:label="detail"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <service
             android:name="homework.HomeworkNotifyService"
             android:enabled="true"
